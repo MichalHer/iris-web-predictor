@@ -19,6 +19,7 @@ W trakcie badań istotnym wnioskiem jest istnienie silnej korelacji pomiędzy pa
 
 Oraz fakt, że największą wartość klasyfikacyjną mają rozmiary "petal length" i "petal width"<br>
 
+##Testy modeli AI
 W drodze testów modeli AI utworzonych przy użyciu biblioteki scikit-learn uzyskano następujące wyniki poprawności predykcji:
 
 |Model name|Accuracy|
@@ -28,6 +29,6 @@ W drodze testów modeli AI utworzonych przy użyciu biblioteki scikit-learn uzys
 |K Neightbors Classifier|1.000000|
 |C-Support Vector Classification|0.966667|
 
-Na podstawie uzyskanych wniosków przyjęto, że najskuteczniejszą predykcję uzyskac można przy uzyciu modelu "n najbliższych sąsiadów" (K Neightbors Classifier)<br>
+Na podstawie uzyskanych wniosków przyjęto, że najskuteczniejszą predykcję uzyskac można przy uzyciu modelu "n najbliższych sąsiadów"<br>(K Neightbors Classifier)<br>
 
 
