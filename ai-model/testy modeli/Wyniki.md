@@ -1,4 +1,6 @@
 ## Dataset
+Datasep obrany ze strony https://www.kaggle.com/datasets/uciml/iris
+
 Źródłem danych jest dataset zawierający odpowiednio etykietowane dane na temat rozmiarów płatka irysa:
 - "petal width" (szerokość płatka kwiatu), 
 - "petal length" (długość płatka kwiatu), 
