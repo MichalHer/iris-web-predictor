@@ -19,7 +19,7 @@ W trakcie badań istotnym wnioskiem jest istnienie silnej korelacji pomiędzy pa
 
 Oraz fakt, że największą wartość klasyfikacyjną mają rozmiary "petal length" i "petal width"<br>
 
-##Testy modeli AI
+## Testy modeli AI
 W drodze testów modeli AI utworzonych przy użyciu biblioteki scikit-learn uzyskano następujące wyniki poprawności predykcji:
 
 |Model name|Accuracy|
