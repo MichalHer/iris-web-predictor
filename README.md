@@ -5,7 +5,7 @@ Projekt polega na stworzeniu strony internetowej, pozwalającej na wykonanie pre
 Obiektem przewidywań jest gatunek Irysa, bazując na podanych przez użytkownika rozmiarach jego płatków i działki kielicha kwiatu.
 
 Planowany diagram działania aplikacji w wersji MVP dostępny jest pod adresem url: 
-https://drive.google.com/file/d/1JVD6ae2WtcehZoeae7uRc-WzC4z18kYQ/view?usp=sharing
+https://drive.google.com/file/d/1P9Ov1OLkVlXA-d5net67-r-uP8J_vudY/view?usp=sharing
 
 
 ### Technologie:
