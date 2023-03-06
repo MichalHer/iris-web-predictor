@@ -10,4 +10,5 @@ class ProcessId(BaseModel):
     id: int
     
 class PredictionOutput(ProcessId):
+    status: str
     prediction: str
