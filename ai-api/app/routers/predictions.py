@@ -11,10 +11,11 @@ router = APIRouter(
     tags = ['Accounts']
 )
 
+# Creates prediction task in Redis DB
 @router.post("/", response_model=schemas.ProcessId)
 def create_prediction_task(pload: schemas.PredictionInput):
     task_id = randint(10000000000,99999999999)
-    redisClient = StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=0)
+    redisClient = StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, password=settings.REDIS_PASSWORD, db=0)
     redisClient.lpush(task_id, pload.petal_width, pload.petal_length, pload.sepal_width, pload.sepal_length, "Waiting", "None")
     redisClient.expire(task_id, 10800)
     return {"id":task_id}
