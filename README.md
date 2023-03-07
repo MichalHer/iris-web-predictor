@@ -14,6 +14,7 @@ https://drive.google.com/file/d/1P9Ov1OLkVlXA-d5net67-r-uP8J_vudY/view?usp=shari
 - SciKit Learn
 - FastAPI
 - SwaggerUI 
+- Redis
 - React
 - Docker
 - NginX
