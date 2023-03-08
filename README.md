@@ -32,7 +32,10 @@ https://drive.google.com/file/d/1P9Ov1OLkVlXA-d5net67-r-uP8J_vudY/view?usp=shari
 ```
 
 ### Uruchomienie:
-- Instalacja wraz z uruchomieniem odbywa się przy użyciu komendy ```docker-compose up -d```
+- Instalacja wraz z uruchomieniem odbywa się przy użyciu komendy 
+```
+docker-compose up -d
+```
 
 ### Dostępność oraz dokumentacja endpointów:
 - Domyślnie api dostępne jest pod www.localhost:8000 chyba, że zmieniono konfigurację pliku docker-compose.yml<br>
