@@ -38,5 +38,7 @@ docker-compose up -d
 ```
 
 ### Dostępność oraz dokumentacja endpointów:
-- Domyślnie api dostępne jest pod www.localhost:8000 chyba, że zmieniono konfigurację pliku docker-compose.yml<br>
+- Domyślnie api dostępne jest pod www.localhost:8000
 - Dokumentacja dostępna jest pod www.localhost:8000/docs#
+
+Port może się różnić jeśli zmieniono w pliku docker-compose.yml
