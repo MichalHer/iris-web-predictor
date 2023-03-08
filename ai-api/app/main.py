@@ -15,3 +15,7 @@ app.add_middleware(
 )
 
 app.include_router(predictions.router)
+
+@app.get("/")
+def hello():
+    return {"app":"iris web predictor", "version":"1.0 beta"}

@@ -1,0 +1,27 @@
+version: "3"
+services:
+  api:
+    build:
+      context: ai-api
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    links:
+      - redis
+    restart: unless-stopped
+
+  redis:
+    image: redis
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: ai-api
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    links:
+      - redis
+    command: rq worker --url redis://redis:6379 --results-ttl 600

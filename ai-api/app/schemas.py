@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional, List
 
 class PredictionInput(BaseModel):
     sepal_width: float
@@ -7,8 +8,8 @@ class PredictionInput(BaseModel):
     petal_length: float
     
 class ProcessId(BaseModel):
-    id: int
+    id: str
     
 class PredictionOutput(ProcessId):
     status: str
-    prediction: str
+    prediction: Optional[str]
