@@ -3,18 +3,19 @@ from fastapi import Depends, APIRouter, status, HTTPException
 from rq import Queue
 from rq.job import Job
 from rq.exceptions import NoSuchJobError
+import redis
 
 from .. import schemas
 from ..config import settings
 
 from ..aiprocessor import predict
-from ..worker import conn
 
 router = APIRouter(
     prefix="/predictions",
     tags = ['Predictions']
 )
 
+conn = redis.from_url(f"redis://{settings.REDIS_HOST}:{settings.REDIS_PORT}")
 q = Queue(connection=conn)
 
 # Creates prediction task in Redis DB
