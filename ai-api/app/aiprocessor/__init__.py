@@ -1,0 +1,1 @@
+from .jobs.job_prediction import predict

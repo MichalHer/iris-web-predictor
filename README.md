@@ -10,7 +10,6 @@ https://drive.google.com/file/d/1P9Ov1OLkVlXA-d5net67-r-uP8J_vudY/view?usp=shari
 
 ### Technologie:
 
-
 - SciKit Learn
 - FastAPI
 - SwaggerUI 
@@ -18,3 +17,23 @@ https://drive.google.com/file/d/1P9Ov1OLkVlXA-d5net67-r-uP8J_vudY/view?usp=shari
 - React
 - Docker
 - NginX
+
+## Uruchomienie:
+### Wymagania wstępne:
+- Użytkownik posiada zainstalowane środowisko Docker
+- Użytkowink posiada stabilne połączenie z siecią internet
+
+### Konfiguracja:
+- Port uruchomienia API ustawia się w pliku docker-compose.yml - services -> api -> ports
+- W celu zmiany wystawionego portu należy zmodywikować wartość wg schematu :
+```yaml
+    ports:
+      - [port_hosta]:8000
+```
+
+### Uruchomienie:
+- Instalacja wraz z uruchomieniem odbywa się przy użyciu komendy ```docker-compose up -d```
+
+### Dostępność oraz dokumentacja endpointów:
+- Domyślnie api dostępne jest pod www.localhost:8000 chyba, że zmieniono konfigurację pliku docker-compose.yml<br>
+- Dokumentacja dostępna jest pod www.localhost:8000/docs#
