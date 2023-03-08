@@ -24,7 +24,7 @@ https://drive.google.com/file/d/1P9Ov1OLkVlXA-d5net67-r-uP8J_vudY/view?usp=shari
 - Użytkowink posiada stabilne połączenie z siecią internet
 
 ### Konfiguracja:
-- Port uruchomienia API ustawia się w pliku docker-compose.yml - services -> api -> ports
+- Port dostępu do API ustawia się w pliku docker-compose.yml - services -> api -> ports
 - W celu zmiany wystawionego portu należy zmodywikować wartość wg schematu :
 ```yaml
     ports:
