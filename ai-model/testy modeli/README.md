@@ -1,5 +1,5 @@
 ## Dataset
-Dataset obrany ze strony https://www.kaggle.com/datasets/uciml/iris
+Dataset pobrany ze strony https://www.kaggle.com/datasets/uciml/iris
 
 Źródłem danych jest dataset zawierający odpowiednio etykietowane dane na temat rozmiarów płatka irysa:
 - "petal width" (szerokość płatka kwiatu), 
@@ -31,6 +31,6 @@ W drodze testów modeli AI utworzonych przy użyciu biblioteki scikit-learn uzys
 |K Neightbors Classifier|1.000000|
 |C-Support Vector Classification|0.966667|
 
-Na podstawie uzyskanych wniosków przyjęto, że najskuteczniejszą predykcję uzyskac można przy uzyciu modelu "n najbliższych sąsiadów"<br>(K Neightbors Classifier)<br>
+Na podstawie uzyskanych wniosków przyjęto, że najskuteczniejszą predykcję uzyskać można przy uzyciu modelu "n najbliższych sąsiadów"<br>(K Neightbors Classifier)<br>
 
 
