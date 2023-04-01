@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: worker
+  template:
+    metadata:
+      labels:
+        component: worker
+    spec:
+      containers:
+        - name: worker
+          image: michalher/iris-web-predictor-ai-api
+          command: ["rq"]
+          args: ["worker", "--url", "redis://redis-service:6379", "--results-ttl", "600"]
+          ports:
+            - containerPort: 8001
+          env:
+            - name: REDIS_HOST
+              value: redis-service
+            - name: REDIS_PORT
+              value: "6379"
