@@ -10,7 +10,6 @@ const App: FC = () => {
   const [sepalWidth, setSepalWidth] = useState<number>(2);
   const [petalLength, setPetalLength] = useState<number>(0);
   const [petalWidth, setPetalWidth] = useState<number>(0);
-  const [predictIrisID, setPredictIrisID] = useState<number>(0);
   const [predictionList, setPredictionList] = useState<IPrediction[]>([]);
 
   const url = 'http://localhost:8000'
@@ -29,36 +28,36 @@ const App: FC = () => {
       setPetalWidth(Number(event.target.value));
     }
   };
-  
+
   async function postIrisPrediction() {
     try {
-      // const response = await fetch(url + '/predictions', {
-      //   method: 'POST',
-      //   body: JSON.stringify({
-      //   sepal_width: sepalWidth,
-      //   sepal_length: sepalLength,
-      //   petal_width: petalWidth,
-      //   petal_length: petalLength,
-      //   }),
-      // headers: {
-      //   'Content-Type': 'application/json',
-      //   Accept: 'application/json',
-      //   },
-      // }); 
-      // if (!response.ok) {
-      //   throw new Error(`Error! status: ${response.status}`);
-      // }
 
-      //const result = (await response.json()) as IPredictionResponse;
-      
-      const result = JSON.parse('{"id": "text"}')
+
+      const response = await fetch(url + '/predictions', {
+        method: 'POST',
+        body: JSON.stringify({
+        sepal_width: sepalWidth,
+        sepal_length: sepalLength,
+        petal_width: petalWidth,
+        petal_length: petalLength,
+        }),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        },
+      }); 
+      if (!response.ok) {
+        throw new Error(`Error! status: ${response.status}`);
+      }
+
+      const result = (await response.json()) as IPredictionResponse;
       
       console.log('result is: ', JSON.stringify(result, null, 4));
       let responseString = JSON.stringify(result);
       let responseObject = JSON.parse(responseString);
 
-      const newTask = { predictionID: responseObject.id, predictionStatus: 'In Progress', prediction: 'In progress'};
-      setPredictionList([...predictionList, newTask]);
+      const newPrediction = { predictionID: responseObject.id, predictionStatus: 'In Progress', prediction: 'In progress'};
+      setPredictionList([...predictionList, newPrediction]);
 
       setSepalLength(4);
       setSepalWidth(2);
@@ -93,6 +92,14 @@ const App: FC = () => {
       }
 
       const result = (await response.json()) as IPredictionResponse;
+      
+      console.log('result is: ', JSON.stringify(result, null, 4));
+      let responseString = JSON.stringify(result);
+      let responseObject = JSON.parse(responseString);
+
+      setPredictionList(predictionList.filter((prediction) => {
+        return prediction.predictionID = predictionIDToCheck
+      }))
   };
 
   return (
@@ -108,7 +115,7 @@ const App: FC = () => {
     </div>
     <div className="predictionList">
         {predictionList.map((prediction: IPrediction, key: number) => {
-          return <PredictionList key={key} prediction={prediction} />;
+          return <PredictionList key={key} prediction={prediction} checkPrediction={checkPrediction} />;
         })}
       </div>
   </div>

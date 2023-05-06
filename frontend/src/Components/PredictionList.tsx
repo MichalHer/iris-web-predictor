@@ -3,6 +3,7 @@ import { IPrediction } from "../Interfaces";
 
 interface Props {
   prediction: IPrediction;
+  checkPrediction(predictionIDToCheck: string): void;
 }
 
 const PredictionList = ({ prediction }: Props) => {
@@ -12,7 +13,7 @@ const PredictionList = ({ prediction }: Props) => {
         <span>{prediction.predictionID}</span>
         <span>{prediction.predictionStatus}</span>
         <span>{prediction.prediction}</span>
-        <button >Check prediction</button>
+        <button onClick={() => {checkPrediction(prediction.predictionID);}} >Check prediction</button>
       </div>
     </div>
   );
