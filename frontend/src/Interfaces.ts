@@ -3,3 +3,7 @@ export interface IPrediction {
     predictionStatus: string;
     prediction: string;
   }
+
+export interface IPredictionResponse {
+  id: string;
+}

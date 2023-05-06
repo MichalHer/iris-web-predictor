@@ -13,7 +13,7 @@ body {
 }
 
 .header {
-  flex: 30%;
+  flex: 20%;
   background-color: tomato;
   width: 100%;
   display: flex;
@@ -58,24 +58,24 @@ body {
   border: 1px solid grey;
 }
 
-.todoList {
-  flex: 70%;
+.predictionList {
+  flex: 80%;
   width: 100%;
   display: flex;
   align-items: center;
-  padding-top: 50px;
+  padding-top: 10px;
   flex-direction: column;
 }
 
-.task {
+.prediction {
   width: 500px;
-  height: 50px;
+  height: 40px;
   display: flex;
   color: white;
-  margin: 15px;
+  margin: 5px;
 }
 
-.task .content {
+.prediction .content {
   flex: 80%;
   height: 100%;
   display: flex;
@@ -83,7 +83,7 @@ body {
   align-items: center;
 }
 
-.task .content span {
+.prediction .content span {
   display: grid;
   place-items: center;
   border: 1px solid white;
@@ -94,7 +94,7 @@ body {
   background-color: tomato;
 }
 
-.task button {
+.prediction button {
   flex: 20%;
   height: 100%;
   border: none;

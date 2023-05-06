@@ -12,6 +12,7 @@ const PredictionList = ({ prediction }: Props) => {
         <span>{prediction.predictionID}</span>
         <span>{prediction.predictionStatus}</span>
         <span>{prediction.prediction}</span>
+        <button >Check prediction</button>
       </div>
     </div>
   );

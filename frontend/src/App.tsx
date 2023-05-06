@@ -1,7 +1,7 @@
 import React, {FC, ChangeEvent, useState} from 'react';
 import './App.css';
 import TodoTask from "./Components/PredictionList";
-import { IPrediction } from "./Interfaces";
+import { IPrediction, IPredictionResponse } from "./Interfaces";
 import PredictionList from './Components/PredictionList';
 
 const App: FC = () => {
@@ -29,38 +29,41 @@ const App: FC = () => {
       setPetalWidth(Number(event.target.value));
     }
   };
-
-  type CreatePredictionResponse = {
-    id: string;
-  }
-
+  
   async function postIrisPrediction() {
     try {
-      const response = await fetch(url + '/predictions', {
-        method: 'POST',
-        body: JSON.stringify({
-        sepal_width: sepalWidth,
-        sepal_length: sepalLength,
-        petal_width: petalWidth,
-        petal_length: petalLength,
-        }),
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        },
-      }); 
-      if (!response.ok) {
-        throw new Error(`Error! status: ${response.status}`);
-      }
+      // const response = await fetch(url + '/predictions', {
+      //   method: 'POST',
+      //   body: JSON.stringify({
+      //   sepal_width: sepalWidth,
+      //   sepal_length: sepalLength,
+      //   petal_width: petalWidth,
+      //   petal_length: petalLength,
+      //   }),
+      // headers: {
+      //   'Content-Type': 'application/json',
+      //   Accept: 'application/json',
+      //   },
+      // }); 
+      // if (!response.ok) {
+      //   throw new Error(`Error! status: ${response.status}`);
+      // }
 
-      const result = (await response.json()) as CreatePredictionResponse;
-  
+      //const result = (await response.json()) as IPredictionResponse;
+      
+      const result = JSON.parse('{"id": "text"}')
+      
       console.log('result is: ', JSON.stringify(result, null, 4));
       let responseString = JSON.stringify(result);
-      let responsObject = JSON.parse(responseString);
+      let responseObject = JSON.parse(responseString);
 
-      const newTask = { predictionID: responsObject.id, predictionStatus: 'In Progress', prediction: 'In progress'};
+      const newTask = { predictionID: responseObject.id, predictionStatus: 'In Progress', prediction: 'In progress'};
       setPredictionList([...predictionList, newTask]);
+
+      setSepalLength(4);
+      setSepalWidth(2);
+      setPetalLength(0);
+      setPetalWidth(0);
   
       return result;
     } catch (error) {
@@ -74,6 +77,23 @@ const App: FC = () => {
     }
   }
 
+  async function checkPrediction(predictionIDToCheck: string) {
+      const response = await fetch(url + '/predictions', {
+        method: 'POST',
+        body: JSON.stringify({
+        id: predictionIDToCheck
+        }),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        },
+      }); 
+      if (!response.ok) {
+        throw new Error(`Error! status: ${response.status}`);
+      }
+
+      const result = (await response.json()) as IPredictionResponse;
+  };
 
   return (
   <div className="App">
@@ -83,11 +103,6 @@ const App: FC = () => {
       <input type="number" min={2} max={5} step={.1} placeholder='Sepal Width' name='sepalWidth' onChange={handleChange} />
       <input type="number" min={0} max={7} step={.1} placeholder='Petal Length' name='petalLength' onChange={handleChange} />
       <input type="number" min={0} max={3} step={.1} placeholder='Petal Width' name='petalWidth' onChange={handleChange} />
-      {/* <select ng-model='modelSelect' name='model'>                                                                
-        <option value='Logistic Regression'>Logistic Regression</option>
-        <option value='K Nearest Neighbour'>K Nearest Neighbour</option>
-        <option value='SVM'>SVM</option>
-      </select> */}
       </div>
       <button onClick={postIrisPrediction}>Predict</button>
     </div>
