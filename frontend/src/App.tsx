@@ -11,7 +11,7 @@ const App: FC = () => {
   const [petalLength, setPetalLength] = useState<number>(0);
   const [petalWidth, setPetalWidth] = useState<number>(0);
   const [predictIrisID, setPredictIrisID] = useState<number>(0);
-  const [predictionList, setTodoList] = useState<IPrediction[]>([]);
+  const [predictionList, setPredictionList] = useState<IPrediction[]>([]);
 
   const url = 'http://localhost:8000'
 
@@ -56,6 +56,11 @@ const App: FC = () => {
       const result = (await response.json()) as CreatePredictionResponse;
   
       console.log('result is: ', JSON.stringify(result, null, 4));
+      let responseString = JSON.stringify(result);
+      let responsObject = JSON.parse(responseString);
+
+      const newTask = { predictionID: responsObject.id, predictionStatus: 'In Progress', prediction: 'In progress'};
+      setPredictionList([...predictionList, newTask]);
   
       return result;
     } catch (error) {
@@ -86,7 +91,7 @@ const App: FC = () => {
       </div>
       <button onClick={postIrisPrediction}>Predict</button>
     </div>
-    <div className="todoList">
+    <div className="predictionList">
         {predictionList.map((prediction: IPrediction, key: number) => {
           return <PredictionList key={key} prediction={prediction} />;
         })}

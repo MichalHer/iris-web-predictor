@@ -10,7 +10,8 @@ const PredictionList = ({ prediction }: Props) => {
     <div className="prediction">
       <div className="content">
         <span>{prediction.predictionID}</span>
-        <span>{prediction.status}</span>
+        <span>{prediction.predictionStatus}</span>
+        <span>{prediction.prediction}</span>
       </div>
     </div>
   );

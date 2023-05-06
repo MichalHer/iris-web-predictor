@@ -1,4 +1,5 @@
 export interface IPrediction {
     predictionID: string;
-    status: string;
+    predictionStatus: string;
+    prediction: string;
   }
