@@ -1,18 +1,17 @@
 import React, {FC, ChangeEvent, useState} from 'react';
 import './App.css';
-import TodoTask from "./Components/PredictionList";
-import { IPrediction, IPredictionResponse } from "./Interfaces";
-import PredictionList from './Components/PredictionList';
+import PredictionItem from './Components/PredictionItem';
+import { IPredictionTaskResponse } from './Interfaces/PredictionTaskResponse';
+import { IPredictionResponse } from './Interfaces/PredictionResponse';
+import APIService from './Services/apiservice';
 
 const App: FC = () => {
 
-  const [sepalLength, setSepalLength] = useState<number>(4);
-  const [sepalWidth, setSepalWidth] = useState<number>(2);
+  const [sepalLength, setSepalLength] = useState<number>(0);
+  const [sepalWidth, setSepalWidth] = useState<number>(0);
   const [petalLength, setPetalLength] = useState<number>(0);
   const [petalWidth, setPetalWidth] = useState<number>(0);
-  const [predictionList, setPredictionList] = useState<IPrediction[]>([]);
-
-  const url = 'http://localhost:8000'
+  const [predictionList, setPredictionList] = useState<IPredictionResponse[]>([]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.name === "sepalLength") {
@@ -29,96 +28,57 @@ const App: FC = () => {
     }
   };
 
-  async function postIrisPrediction() {
-    try {
-
-
-      const response = await fetch(url + '/predictions', {
-        method: 'POST',
-        body: JSON.stringify({
-        sepal_width: sepalWidth,
-        sepal_length: sepalLength,
-        petal_width: petalWidth,
-        petal_length: petalLength,
-        }),
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        },
-      }); 
-      if (!response.ok) {
-        throw new Error(`Error! status: ${response.status}`);
-      }
-
-      const result = (await response.json()) as IPredictionResponse;
-      
-      console.log('result is: ', JSON.stringify(result, null, 4));
-      let responseString = JSON.stringify(result);
-      let responseObject = JSON.parse(responseString);
-
-      const newPrediction = { predictionID: responseObject.id, predictionStatus: 'In Progress', prediction: 'In progress'};
-      setPredictionList([...predictionList, newPrediction]);
-
-      setSepalLength(4);
-      setSepalWidth(2);
-      setPetalLength(0);
-      setPetalWidth(0);
-  
-      return result;
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log('error message: ', error.message);
-        return error.message;
-      } else {
-        console.log('unexpected error: ', error);
-        return 'An unexpected error occurred';
-      }
+  const addPrediction = (): void => {
+    const prediction:IPredictionResponse = {
+      id: "unknown",
+      status: "created",
+      prediction: "waiting..."
     }
+    APIService.create_prediction_task(
+      sepalWidth,
+      sepalLength,
+      petalWidth,
+      petalLength
+    ).then((response) => {
+      prediction.id = response.id
+    }).then(() =>{
+      APIService.get_prediction(prediction.id).then((response) => {
+        prediction.id = response.id
+        prediction.prediction = response.prediction
+        prediction.status = response.status
+        setPredictionList([...predictionList, prediction]);
+      }
+    )})
   }
 
-  async function checkPrediction(predictionIDToCheck: string) {
-      const response = await fetch(url + '/predictions', {
-        method: 'POST',
-        body: JSON.stringify({
-        id: predictionIDToCheck
-        }),
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        },
-      }); 
-      if (!response.ok) {
-        throw new Error(`Error! status: ${response.status}`);
-      }
-
-      const result = (await response.json()) as IPredictionResponse;
-      
-      console.log('result is: ', JSON.stringify(result, null, 4));
-      let responseString = JSON.stringify(result);
-      let responseObject = JSON.parse(responseString);
-
-      setPredictionList(predictionList.filter((prediction) => {
-        return prediction.predictionID = predictionIDToCheck
-      }))
-  };
+  const refreshPrediction = (refreshed_id:string): void => {
+    APIService.get_prediction(refreshed_id).then((response) => {
+      let objIndex = predictionList.findIndex((obj => obj.id == refreshed_id))
+      predictionList[objIndex].prediction = response.prediction
+      predictionList[objIndex].status = response.status
+      setPredictionList([...predictionList])
+    })
+  }
 
   return (
-  <div className="App">
-    <div className='header'>
-      <div className='inputContainer'>
-      <input type="number" min={4} max={8} step={.1} placeholder='Sepal Length' name='sepalLength'  onChange={handleChange} />
-      <input type="number" min={2} max={5} step={.1} placeholder='Sepal Width' name='sepalWidth' onChange={handleChange} />
-      <input type="number" min={0} max={7} step={.1} placeholder='Petal Length' name='petalLength' onChange={handleChange} />
-      <input type="number" min={0} max={3} step={.1} placeholder='Petal Width' name='petalWidth' onChange={handleChange} />
+    <>
+      <div className="App">
+        <div className='header'>
+          <div className='inputContainer'>
+            <input type="number" step={.1} placeholder='Sepal Length' name='sepalLength'  onChange={handleChange} />
+            <input type="number" step={.1} placeholder='Sepal Width' name='sepalWidth' onChange={handleChange} />
+            <input type="number" step={.1} placeholder='Petal Length' name='petalLength' onChange={handleChange} />
+            <input type="number" step={.1} placeholder='Petal Width' name='petalWidth' onChange={handleChange} />
+          </div>
+          <button onClick={addPrediction}>Predict</button>
+        </div>
+        <div className="predictionList" onChange={handleChange}>
+          {predictionList.map((prediction:IPredictionResponse) => {
+            return <PredictionItem prediction={prediction} refreshfunc={refreshPrediction}/>
+          })}
+        </div>
       </div>
-      <button onClick={postIrisPrediction}>Predict</button>
-    </div>
-    <div className="predictionList">
-        {predictionList.map((prediction: IPrediction, key: number) => {
-          return <PredictionList key={key} prediction={prediction} checkPrediction={checkPrediction} />;
-        })}
-      </div>
-  </div>
+    </>
   );
 }
 
