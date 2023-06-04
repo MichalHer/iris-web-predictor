@@ -14,7 +14,7 @@ body {
 
 .header {
   flex: 20%;
-  background-color: tomato;
+  background-color: #5D3FD3  ;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -91,14 +91,28 @@ body {
   height: 100%;
   font-size: 18px;
   border-right: none;
-  background-color: tomato;
+  background-color: #5D3FD3;
 }
 
-.prediction button {
+.prediction .predictionbutton {
   flex: 20%;
   height: 100%;
-  border: none;
-  background-color: lightseagreen;
+  border: 1px solid white;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  background-color: green;
+  color: white;
+  cursor: pointer;
+}
+
+.prediction .removebutton {
+  flex: 20%;
+  height: 100%;
+  border: 1px solid white;
+  background-color: green;
+  border-top: none;
+  border-bottom: none;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   color: white;

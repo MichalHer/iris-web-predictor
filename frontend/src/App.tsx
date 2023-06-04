@@ -60,6 +60,12 @@ const App: FC = () => {
     })
   }
 
+  const removePrediction = (removed_id:string): void => {
+      setPredictionList(predictionList.filter((prediction) => {
+        return prediction.id != removed_id
+      }))
+  }
+
   return (
     <>
       <div className="App">
@@ -74,7 +80,7 @@ const App: FC = () => {
         </div>
         <div className="predictionList" onChange={handleChange}>
           {predictionList.map((prediction:IPredictionResponse) => {
-            return <PredictionItem prediction={prediction} refreshfunc={refreshPrediction}/>
+            return <PredictionItem prediction={prediction} refreshfunc={refreshPrediction} removefunc={removePrediction}/>
           })}
         </div>
       </div>

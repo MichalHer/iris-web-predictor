@@ -5,6 +5,7 @@ import APIService from "../Services/apiservice"
 interface IProps {
   prediction: IPredictionResponse;
   refreshfunc(id:string): void;
+  removefunc(id:string): void;
 }
 
 const PredictionItem: React.FunctionComponent<IProps> = (props) => {
@@ -15,7 +16,8 @@ const PredictionItem: React.FunctionComponent<IProps> = (props) => {
         <span>{props.prediction.status}</span>
         <span>{props.prediction.prediction}</span>
       </div>
-      <button onClick={() => {props.refreshfunc(props.prediction.id)}}>Refresh</button>
+      <button className='predictionbutton' onClick={() => {props.refreshfunc(props.prediction.id)}}>Refresh</button>
+      <button className='removebutton' onClick={() => {props.removefunc(props.prediction.id)}}>Delete</button>
     </div>
   )
 }
