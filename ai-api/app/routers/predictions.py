@@ -32,4 +32,4 @@ def get_prediction_result_by_id(id: str):
         job = Job.fetch(id, connection=conn)
     except NoSuchJobError:
         raise HTTPException(status_code=404, detail=[{"msg":"Job not found."}])
-    return {"id":id, "status":job.get_status(), "prediction": job.result.replace("-"," ").title()}
+    return {"id":id, "status":job.get_status(), "prediction": str(job.result).replace("-"," ").title()}

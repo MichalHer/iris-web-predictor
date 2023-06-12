@@ -24,6 +24,7 @@ body {
 .header .inputContainer {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .header input {
@@ -59,7 +60,7 @@ body {
 }
 
 .predictionList {
-  flex: 80%;
+  flex: 90%;
   width: 100%;
   display: flex;
   align-items: center;
@@ -68,15 +69,16 @@ body {
 }
 
 .prediction {
-  width: 500px;
+  width: 70%;
   height: 40px;
   display: flex;
   color: white;
   margin: 5px;
+  align-items: center;
 }
 
 .prediction .content {
-  flex: 80%;
+  flex: 0%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -87,7 +89,7 @@ body {
   display: grid;
   place-items: center;
   border: 1px solid white;
-  width: 200px;
+  width: 300px;
   height: 100%;
   font-size: 18px;
   border-right: none;
@@ -95,7 +97,7 @@ body {
 }
 
 .prediction .predictionbutton {
-  flex: 20%;
+  flex: 10%;
   height: 100%;
   border: 1px solid white;
   border-right: none;
@@ -107,7 +109,7 @@ body {
 }
 
 .prediction .removebutton {
-  flex: 20%;
+  flex: 10%;
   height: 100%;
   border: 1px solid white;
   background-color: green;

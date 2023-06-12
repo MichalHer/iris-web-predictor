@@ -15,7 +15,7 @@ class APIService {
         }
         return axios({
             method:"post",
-            url: API_URL + `/predictions`,
+            url: API_URL + `/predictions/`,
             data: body,
             headers: { "Content-Type": "application/json"}
         }).then((response) => {
