@@ -66,6 +66,12 @@ const App: FC = () => {
       }))
   }
 
+  const myStyle = {
+    backgroundImage: "url(https://w.forfun.com/fetch/99/992e466070f4a7b1a0cc6aedd04d7716.jpeg?w=1470&r=0.5625)",
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+  };
+
   return (
     <>
       <div className="App">
@@ -78,7 +84,7 @@ const App: FC = () => {
           </div>
           <button onClick={addPrediction}>Predict</button>
         </div>
-        <div className="predictionList" onChange={handleChange}>
+        <div style={myStyle} className="predictionList" onChange={handleChange}>
           {predictionList.map((prediction:IPredictionResponse) => {
             return <PredictionItem prediction={prediction} refreshfunc={refreshPrediction} removefunc={removePrediction}/>
           })}

@@ -13,16 +13,16 @@ spec:
   rules:
     - http:
         paths:
-          # - path: /?(.*)
+          - path: /?(.*)
             # UPDATE PATH
-            # pathType: Prefix
-            # # ADD PATHTYPE
-            # backend:
-            #   service:
-            #     # UPDATE SERVICE FIELDS
-            #     name: api-service
-            #     port:
-            #       number: 8000
+            pathType: Prefix
+            # ADD PATHTYPE
+            backend:
+              service:
+                # UPDATE SERVICE FIELDS
+                name: client-service
+                port:
+                  number: 3000
           - path: /api/?(.*)
             # UPDATE PATH
             pathType: Prefix
