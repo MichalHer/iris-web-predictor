@@ -46,8 +46,11 @@ kubectl apply -f ./k8s-configs
 ```
 - Po zastosowaniu komendy komponenty systemu powinny zostać pobrane i uruchomione automatycznie
 
-### Dostępność oraz dokumentacja endpointów:
-- Domyślnie api dostępne jest pod www.localhost:8000
-- Dokumentacja dostępna jest pod www.localhost:8000/docs#
+### Dokumentacja endpointów:
+- Kubernetes wraz z Ingress blokuje dostęp do dokumentacji poprzez nginx. Aby przejrzeć dokumentację należy przekierowac port serwisu API na zewnątrz i połączyć sie z nim bezpośrednio.
+```
+kubectl port-forward service/api-service 8000:8000
+```
+- Dokumentacja powinna być dostępna pod adresem www.localhost:8000/docs#
 
 Port może się różnić jeśli zmieniono w pliku docker-compose.yml
