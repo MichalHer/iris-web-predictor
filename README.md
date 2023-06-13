@@ -32,10 +32,19 @@ https://drive.google.com/file/d/1P9Ov1OLkVlXA-d5net67-r-uP8J_vudY/view?usp=shari
 ```
 
 ### Uruchomienie:
+#### Docker (metoda porzucona):
 - Instalacja wraz z uruchomieniem odbywa się przy użyciu komendy 
 ```
 docker-compose up -d
 ```
+
+#### Kubernetes:
+- Aplikacja wymaga zainstalowanego rozszerzenia [ingress-nginx](https://github.com/kubernetes/ingress-nginx)
+- Instalacja w Kubernetes odbywa się poprzez uruchomienie z pozycji folderu głównego komendy
+```
+kubectl apply -f ./k8s-configs
+```
+- Po zastosowaniu komendy komponenty systemu powinny zostać pobrane i uruchomione automatycznie
 
 ### Dostępność oraz dokumentacja endpointów:
 - Domyślnie api dostępne jest pod www.localhost:8000
